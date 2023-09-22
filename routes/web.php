@@ -24,3 +24,4 @@ Route::get('/logout',[SitioController::class, 'logout'])->name('logout');
 
 Route::post('validar-usuario',[SitioController::class, 'login']);
 Route::post('/registrar-usuario',[SitioController::class,'registerValitationForm']);
+Route::get('/consulta',[SitioController::class,'ConsultaUser'])->name('consulta');

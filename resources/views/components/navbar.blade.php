@@ -23,9 +23,6 @@
     flex-grow: 0;
   }
 
-  .dropdown-menu {
-    /* margin-left: -40px; */
-  }
 
   .dropdown-menu[data-bs-popper] {
     left: -80px;
@@ -86,7 +83,8 @@
                 data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{Auth::user()->name}}<small class="d-md-none ms-2"></small>
               </a>
               <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown2">
-                <li><a class="dropdown-item text-light uil uil-user" href="">Perfil</a></li>
+                <li><a class="dropdown-item text-light uil uil-user" href="{{route('consulta')}}">Usuarios</a></li>
+                <li><a class="dropdown-item text-light uil uil-10-plus" href="">Perfil</a></li>
                 <li><a class="dropdown-item text-light  uil uil-signout" href="{{ route('logout') }}">Logout</a>
                 <li>
               </ul>

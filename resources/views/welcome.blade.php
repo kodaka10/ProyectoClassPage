@@ -12,6 +12,11 @@
     </head>
     <body >
        <x-navbar/>
-       <H3>Inicio</H3>
+       @auth
+            <h3>Bienvenido</h3>
+       @else
+            <H3>Inicio</H3>
+       @endauth
+
     </body>
 </html>

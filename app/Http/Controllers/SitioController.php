@@ -25,7 +25,7 @@ class SitioController extends Controller
     {
         $request -> validate(['nombre' => 'required|max:50',
         'apellido' => 'required|max:50',
-        'correo' => 'required|email',
+        'correo' => 'required|email|unique:users,email',
         'contraseña' => 'required|max:10']);
         
         $user = new User();
@@ -33,7 +33,6 @@ class SitioController extends Controller
         $user->name = $request->nombre;
         $user->password = Hash::make($request->contraseña);
         $user->lastname = $request->apellido;
-        
         $user->save();
 
         //Auth::login($user);
@@ -77,6 +76,17 @@ class SitioController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+
+
+    public function ConsultaUser()
+    {
+        //User::get();
+        //User::where('name','juan')->get();
+        $usuarios = User::all();
+        //dd($usuarios);
+
+        return view('consulta',['usuarios'=> $usuarios]);
     }
 
     /*
