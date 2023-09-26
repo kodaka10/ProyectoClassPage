@@ -89,6 +89,12 @@ class SitioController extends Controller
         return view('consulta',['usuarios'=> $usuarios]);
     }
 
+    public function ShowUsers(User $usuarios)
+    {
+        return view('UsuariosC',compact('usuarios'));
+    }
+
+
     /*
     public function index()
     {

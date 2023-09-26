@@ -10,13 +10,8 @@
     <h3>Consulta Usuarios</h3>
 
     <ul>
-         @foreach ($usuarios as $usuario)
-         
-         <li>{{$usuario->name}}</li>
-         <li>{{$usuario->lastname}}</li>
-         <li>{{$usuario->email}}</li>
-         <li>{{$usuario->id}}</li>
-         <h4>--------------------------------------------</h4>
+         @foreach ($usuarios as $usuario)    
+         <li><a href="{{route('usuariosC', $usuario->id)}}">{{$usuario->name}}</a></li>
          @endforeach
          <br>
     </ul>
