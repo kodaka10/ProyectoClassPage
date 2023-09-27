@@ -94,6 +94,30 @@ class SitioController extends Controller
         return view('UsuariosC',compact('usuarios'));
     }
 
+    public function editUserForm(User $usuarios){
+        return view('editUser', compact('usuarios'));
+    }
+
+    public function updateUserSave(Request $request, User $usuarios)
+    {
+        $request -> validate(['nombre' => 'required|max:50',
+        'apellido' => 'required|max:50',
+        'correo' => 'required|email|unique:users,email']);
+
+        $usuarios->name = $request->nombre;
+        $usuarios->lastname = $request->apellido;
+        $usuarios->email = $request->correo;
+        $usuarios->save();
+        return redirect()->route('consulta');
+    }
+
+    public function deleteUserSave(User $usuarios)
+    {
+        $usuarios->delete();
+        return redirect()->route('home');
+    }
+
+
 
     /*
     public function index()

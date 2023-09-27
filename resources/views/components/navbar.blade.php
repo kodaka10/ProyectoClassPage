@@ -73,7 +73,8 @@
         @auth
 
         <ul class="navbar-nav  flex-row flex-wrap text-light">
-          <li><a class="nav-link  text-white" href="#">Clases<small class="d-md-none ms-2"></small></a></li>
+          <li><a class="nav-link  text-white" href="{{route('crearClase')}}">Crear-Clase<small class="d-md-none ms-2"></small></a></li>
+          <li><a class="nav-link  text-white" href="{{route('clases')}}">Clases<small class="d-md-none ms-2"></small></a></li>
             <li class="nav-item col-6 col-md-auto  dropdown">
               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown2" role="button"
                 data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{Auth::user()->name}}<small class="d-md-none ms-2"></small>

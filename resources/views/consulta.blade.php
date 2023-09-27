@@ -11,7 +11,13 @@
 
     <ul>
          @foreach ($usuarios as $usuario)    
-         <li><a href="{{route('usuariosC', $usuario->id)}}">{{$usuario->name}}</a></li>
+         <li><a href="{{route('usuariosC', $usuario->id)}}">{{$usuario->name}}</a>
+         <a href="{{route('editUser', $usuario->id)}}"> Editar</a></li>
+         <form action="{{route('deleteUser', $usuario->id)}}" method="post">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="eliminar">
+         </form>
          @endforeach
          <br>
     </ul>
