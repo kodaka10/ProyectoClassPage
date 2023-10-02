@@ -39,3 +39,12 @@ Route::delete('/deleteUser/{usuarios}',[SitioController::class,'deleteUserSave']
 Route::get('/clases',[ClaseController::class,'vistaClases'])->name('clases');
 Route::get('/crearClase',[ClaseController::class,'crearClaseForm'])->name('crearClase');
 Route::post('/crear-clase',[ClaseController::class,'crearClaseSave'])->name('crear-clase');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
