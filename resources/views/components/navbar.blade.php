@@ -1,117 +1,66 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <title>NavBar</title>
-</head>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;900&display=swap');
-
-  *
-  {
-    font-family: 'Poppins', sans-serif;
-  }
-
-  .navbar-collapse {
-    flex-grow: 0;
-  }
-
-
-  .dropdown-menu[data-bs-popper] {
-    left: -80px;
-  }
-
-  .dropdown-item:hover {
-    background-color: rgba(85, 76, 76, 0.404);
-
-  }
-
-  .dropdown-item:focus {
-    background-color: rgba(85, 76, 76, 0.404);
-
-  }
-
-  .foto_p {
-    border-radius: 20px 20px;
-  }
-
-  @media screen and (max-width: 767px) {
-    .dropdown-menu {
-      margin-left: 0px;
-    }
-  }
-
-
-
-</style>
-
-<body>
-
-  <div id="number" hidden></div>
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container-fluid">
-
-      <a class="navbar-brand" href="{{ url('/') }}">
-        <img src="" width="30" alt="">
-        <span class="text-white">ClassPage</span>
-      </a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="menu">
-        @auth
-
-        <ul class="navbar-nav  flex-row flex-wrap text-light">
-          <li><a class="nav-link  text-white" href="{{route('crearClase')}}">Crear-Clase<small class="d-md-none ms-2"></small></a></li>
-          <li><a class="nav-link  text-white" href="{{route('clases')}}">Clases<small class="d-md-none ms-2"></small></a></li>
-            <li class="nav-item col-6 col-md-auto  dropdown">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown2" role="button"
-                data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">{{Auth::user()->name}}<small class="d-md-none ms-2"></small>
-              </a>
-              <ul class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown2">
-                <li><a class="dropdown-item text-light uil uil-user" href="{{route('consulta')}}">Usuarios</a></li>
-                <li><a class="dropdown-item text-light uil uil-10-plus" href="">Perfil</a></li>
-                <li><a class="dropdown-item text-light  uil uil-signout" href="{{ route('logout') }}">Logout</a>
-                <li>
-              </ul>
+<x-app-layout>
+  <nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a href="{{ url('/') }}" class="flex items-center">
+        {{-- <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo" /> --}}
+        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ClassPage</span>
+    </a>
+    @auth    
+    <div class="flex items-center md:order-2">
+        <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+          <span class="sr-only">Open user menu</span>
+          <img class="w-8 h-8 rounded-full " src="/Images/Perfil/Default.webp" alt="user photo">
+        </button>
+        <!-- Dropdown menu -->
+        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+          <div class="px-4 py-3">
+            <span class="block text-sm text-gray-900 dark:text-white">{{Auth::user()->name}}</span>
+          </div>
+          <ul class="py-2" aria-labelledby="user-menu-button">
+            <li>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Perfil</a>
+            </li>
+            <li>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Mis Clases</a>
+            </li>
+            <li>
+              <a  href="{{ route('logout') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Salir</a>
             </li>
           </ul>
-
-         @else
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                <a class="nav-link text-white margen uil uil-user-square" href="{{ route('register') }}">SignIn</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link text-white margen uil uil-user-square" href="{{ route('login') }}">Login</a>
-            </li>
-            </ul>
-
-        @endauth
-
-      </div>
+        </div>
+        <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-user" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </svg>
+      </button>
+    </div>
+    @endauth
+    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+      <ul class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+        <li>
+                    {{-- aria-current="page" --}}
+          <a href="{{ url('/') }}"class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Inicio</a>
+        </li>
+        <li>
+          <a href="{{route('consulta')}}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Usuarios</a>
+        </li>
+        <li>
+          <a href="{{route('crearClase')}}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Crear Clases</a>
+        </li>
+        <li>
+          <a href="{{route('clases')}}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Clases</a>
+        </li>
+        @guest
+        <li>
+          <a href="{{ route('register') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Sign In</a>
+        </li>
+        <li>
+          <a  href="{{ route('login') }}" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Log In</a>
+        </li>
+        @endguest
+      </ul>
+    </div>
     </div>
   </nav>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous"></script>
-
-
-</body>
-
-</html>
+</x-app-layout>
