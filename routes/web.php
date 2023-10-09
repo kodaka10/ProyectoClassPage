@@ -39,6 +39,9 @@ Route::delete('/deleteUser/{usuarios}',[SitioController::class,'deleteUserSave']
 Route::get('/clases',[ClaseController::class,'vistaClases'])->name('clases');
 Route::get('/crearClase',[ClaseController::class,'crearClaseForm'])->name('crearClase');
 Route::post('/crear-clase',[ClaseController::class,'crearClaseSave'])->name('crear-clase');
+Route::get('/mostrar-clases',[ClaseController::class,'mostrarClases'])->name('mostrar-clases');
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

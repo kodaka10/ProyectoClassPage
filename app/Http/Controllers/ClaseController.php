@@ -29,13 +29,17 @@ class ClaseController extends Controller
     $clase->titulo = $request->titulo;
     $clase->materia = $request->materia;
     $clase->seccion =  $request->seccion;
-    $clase->nombre = Auth::user()->name;
-    $clase->apellido = Auth::user()->lastname;
+    // $clase->nombre = Auth::user()->name;
+    // $clase->apellido = Auth::user()->lastname;
     $clase->user_id = Auth::user()->id;
     $clase->save();
 
     return redirect()->route('home');
    }
 
+   public function mostrarClases(Clase $clases)
+   {
+      return view('mostrar-clases', compact('clases'));
+   }
 
 }
