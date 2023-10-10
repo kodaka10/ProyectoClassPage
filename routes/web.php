@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SitioController;
 use App\Http\Controllers\ClaseController;
-
+use App\Livewire\ShowUsers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +27,7 @@ Route::get('/logout',[SitioController::class, 'logout'])->name('logout');
 
 Route::post('validar-usuario',[SitioController::class, 'login']);
 Route::post('/registrar-usuario',[SitioController::class,'registerValitationForm']);
-Route::get('/consulta',[SitioController::class,'ConsultaUser'])->name('consulta');
+// Route::get('/consulta',[SitioController::class,'ConsultaUser'])->name('consulta');
 Route::get('/usuariosC/{usuarios}',[SitioController::class,'ShowUsers'])->name('usuariosC');
 Route::get('/editUser/{usuarios}',[SitioController::class,'editUserForm'])->name('editUser');
 Route::patch('/updateUser/{usuarios}',[SitioController::class,'updateUserSave'])->name('updateUser');
@@ -41,6 +41,10 @@ Route::get('/crearClase',[ClaseController::class,'crearClaseForm'])->name('crear
 Route::post('/crear-clase',[ClaseController::class,'crearClaseSave'])->name('crear-clase');
 Route::get('/mostrar-clases',[ClaseController::class,'mostrarClases'])->name('mostrar-clases');
 
+
+// Route::get('/consulta',[ShowUsers::class,'render'])->name('consulta');
+
+Route::get('/consulta', ShowUsers::class)->name('consulta');
 
 Route::middleware([
     'auth:sanctum',
