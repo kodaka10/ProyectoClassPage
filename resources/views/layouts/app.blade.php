@@ -41,14 +41,8 @@
         @stack('modals')
 
         @livewireScripts
-        {{--         
-        <script>
-            document.addEventListener('livewire:initialized', () => {
-                @this.on('alert', (event) => {
-
-                });
-            });
-        </script> --}}
+        
+        @stack('js')
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     </body>

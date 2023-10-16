@@ -4,6 +4,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\Attributes\On; 
+use Livewire\WithPagination;
 
 class ShowUsers extends Component
 {
@@ -13,7 +14,11 @@ class ShowUsers extends Component
     public $direction = 'desc';
     
     public $openE = false;
+    public $openD = false;
     public $usuarioEditId = '';
+    public $usuarioIdDelete = '';
+
+    use WithPagination;
 
     public $usuarioEdit = ['name' => '', 'lastname' => '','email'=> ''];
 
@@ -24,9 +29,16 @@ class ShowUsers extends Component
         $usuarios = User::where('name', 'like', '%' . $this->buscar . '%')
                             ->orwhere('lastname','like', '%' . $this->buscar . '%')
                             ->orderBy($this->sort, $this->direction)
-                            ->get();
+                            // ->get();
+                            ->paginate(20);
 
         return view('livewire.show-users', compact('usuarios'));
+    }
+
+    //usamos updating + la variable a actualizar $buscar la primera mayuscula
+    public function updatingBuscar()
+    {
+        $this->resetPage();
     }
 
 
@@ -63,11 +75,18 @@ class ShowUsers extends Component
 
     public function destroy($usuarioId)
     {
-        $user = User::find($usuarioId);
-        $user->delete();
+        $this->usuarioIdDelete = $usuarioId;
+        $this->openD = true;
+        // $user = User::find($usuarioId);
+        // $user->delete();
     }
 
-
+    public function confirmDelete()
+    {
+        $user = User::find($this->usuarioIdDelete);
+        $user->delete();
+        $this->reset(['usuarioIdDelete','openD']);
+    }
 
     public function order($sort)
     {

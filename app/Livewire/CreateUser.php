@@ -44,6 +44,14 @@ class CreateUser extends Component
 
     }
 
+    public function updatingOpen()
+    {
+        if($this->open==false)
+        {
+            $this->reset(['name','lastname','email']);
+        }
+    }
+
     public function render()
     {
         return view('livewire.create-user');

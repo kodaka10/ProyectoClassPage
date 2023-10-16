@@ -65,7 +65,7 @@
                                     <i class="bi bi-arrow-down-up float-right"></i>
                                 @endif
                             </th>
-                            <th scope="col" class="cursor-pointer px-6 py-3">
+                            <th scope="col" class="px-6 py-3">
                                 Action
                             </th>
                         </tr>
@@ -94,10 +94,14 @@
                         @endforeach
                     </tbody>   
                 @else
-                   <h3 class="px-6 py-3">No se encontraron registros</h3> 
+                   <h3 class="px-6 py-3 dark:text-gray-400">No se encontraron registros</h3> 
                 @endif
-
             </table>
+            @if($usuarios->hasPages())
+            <div class="px-6 py-3 ">
+                {{$usuarios->links()}} 
+             </div>
+             @endif
         </div>
     </div>
     <br>
@@ -155,4 +159,22 @@
 
     </x-dialog-modal>
 
+
+    <x-dialog-modal wire:model="openD">
+
+        <x-slot name="title">
+            Confirmacion de eliminacion
+        </x-slot>
+
+        <x-slot name="content">
+            ¿Estás seguro de que deseas eliminar al usuario con ID: {{$usuarioIdDelete}}?
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-danger-button class="mr-4" wire:click="confirmDelete">Eliminar</x-button>
+            <x-button  wire:click="$set('openD', false)">Cancelar</x-button>
+        </x-slot>
+
+
+    </x-dialog-modal>
 </div>
