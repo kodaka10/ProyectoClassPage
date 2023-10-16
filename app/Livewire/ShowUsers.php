@@ -12,6 +12,10 @@ class ShowUsers extends Component
     public $sort = 'id';
     public $direction = 'desc';
     
+    public $openE = false;
+    public $usuarioEditId = '';
+
+    public $usuarioEdit = ['name' => '', 'lastname' => '','email'=> ''];
 
    #[On('render')]
 
@@ -24,6 +28,46 @@ class ShowUsers extends Component
 
         return view('livewire.show-users', compact('usuarios'));
     }
+
+
+    public function edit($usuarioId)
+    {
+        $this->resetValidation();
+        $this->openE = true;
+
+        $this->usuarioEditId = $usuarioId;
+
+        $user = User::find($usuarioId);
+        $this->usuarioEdit['name'] = $user->name;
+        $this->usuarioEdit['lastname'] = $user->lastname;
+        $this->usuarioEdit['email'] = $user->email;
+    }
+
+    public function saveE()
+    {
+        $this->validate([
+            'usuarioEdit.name' => 'required|max:50',
+            'usuarioEdit.lastname' => 'required|max:50'
+        ]);
+
+        $user = User::find($this->usuarioEditId);
+        $user->update([
+            'name' => $this->usuarioEdit['name'],
+            'lastname' => $this->usuarioEdit['lastname']
+        ]);
+
+        $this->reset(['usuarioEditId','usuarioEdit','openE']);
+
+        // $this->user = User::all();
+    }
+
+    public function destroy($usuarioId)
+    {
+        $user = User::find($usuarioId);
+        $user->delete();
+    }
+
+
 
     public function order($sort)
     {
@@ -42,8 +86,6 @@ class ShowUsers extends Component
             $this->direction = 'asc';
         }
         
-
-
     }
 
 }

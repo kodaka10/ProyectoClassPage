@@ -72,7 +72,7 @@
                     </thead>
                     <tbody>
                         @foreach ($usuarios as $usuario)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" wire:key="usuario-{{$usuario->id}}">
                                 <th scope="row"
                                     class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{ $usuario->id }}
@@ -87,8 +87,8 @@
                                     {{ $usuario->email }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Eliminar</a>
+                                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer" wire:click="edit({{$usuario->id}})">Editar</a>
+                                    <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer" wire:click="destroy({{$usuario->id}})">Eliminar</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -101,4 +101,58 @@
         </div>
     </div>
     <br>
+
+    <x-dialog-modal wire:model="openE">
+
+        <x-slot name="title">
+            Editar el usuario:
+        </x-slot>
+
+        <x-slot name="content">
+            <div class="mb-4">
+                <x-label value="Nombre"/>
+                <x-input type="text" class="w-full" wire:model.live="usuarioEdit.name"/>
+                @error('usuarioEdit.name')
+                    <span class="text-red-500">
+                        {{$message}}
+                    </span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <x-label value="Apellido"/>
+                <x-input type="text" class="w-full" wire:model.live="usuarioEdit.lastname"/>
+                @error('usuarioEdit.lastname')
+                <span class="text-red-500">
+                    {{$message}}
+                </span>
+                @enderror
+            </div>
+
+            <div class="mb-4">
+                <x-label value="Correo"/>
+                <x-input type="text" class="w-full" wire:model="usuarioEdit.email" disabled/>
+                @error('email')
+                <span class="text-red-500">
+                    {{$message}}
+                </span>
+                @enderror
+            </div>
+
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button class="mr-4 " wire:click="saveE">
+                Editar
+            </x-secondary-button>
+            
+            <x-danger-button wire:click="$set('openE', false)">
+                Cancelar
+            </x-danger-button>
+
+        </x-slot>
+
+
+    </x-dialog-modal>
+
 </div>

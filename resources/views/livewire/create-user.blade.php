@@ -12,7 +12,7 @@
         <x-slot name="content">
             <div class="mb-4">
                 <x-label value="Nombre"/>
-                <x-input type="text" class="w-full" wire:model.live="name"/>
+                <x-input type="text" class="w-full" wire:model="name"/>
                 @error('name')
                     <span class="text-red-500">
                         {{$message}}
@@ -22,7 +22,7 @@
 
             <div class="mb-4">
                 <x-label value="Apellido"/>
-                <x-input type="text" class="w-full" wire:model.live="lastname"/>
+                <x-input type="text" class="w-full" wire:model="lastname"/>
                 @error('lastname')
                 <span class="text-red-500">
                     {{$message}}
@@ -32,7 +32,7 @@
 
             <div class="mb-4">
                 <x-label value="Correo"/>
-                <x-input type="text" class="w-full" wire:model.live="email"/>
+                <x-input type="text" class="w-full" wire:model="email"/>
                 @error('email')
                 <span class="text-red-500">
                     {{$message}}
