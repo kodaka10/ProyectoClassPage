@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <x-navbar/>
+<x-app-layout>
     <br>
     @if($errors->has('error'))
     <div class="alert alert-danger">
@@ -24,8 +16,8 @@
             @error('contraseña')
             <div class="alert alert-danger">{{ $message }}</div>
             @enderror
-            <button type="submit">Entrar</button>
+            <button type="submit" class="dark:text-white">Entrar</button>
         </form>
     </div>
-</body>
-</html>
+
+</x-app-layout>

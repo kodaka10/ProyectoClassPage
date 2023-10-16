@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Clase;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,8 +33,11 @@ class ClaseController extends Controller
     // $clase->nombre = Auth::user()->name;
     // $clase->apellido = Auth::user()->lastname;
     $clase->user_id = Auth::user()->id;
-    $clase->save();
 
+   //  $user = User::find($request->user_id);
+   //  $user->Clase()->save($clase);
+    $clase->save();
+    
     return redirect()->route('home');
    }
 

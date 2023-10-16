@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crear Clase</title>
-</head>
-<body>
-    <x-navbar/>
+<x-app-layout>
     <br>
     <div class="container">
         <div class="row">
@@ -20,7 +11,7 @@
                         <form method="POST" action="/crear-clase">
                             @csrf
                             <div class="form-group">
-                                <label for="titulo">Título:</label>
+                                <label for="titulo" class="dark:text-white">Título:</label>
                                 <input type="text" class="form-control" id="titulo" name="titulo">
                                 @error('titulo')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -28,7 +19,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="descripcion">Materia:</label>
+                                <label for="descripcion" class="dark:text-white">Materia:</label>
                                 <input type="text" class="form-control" id="materia" name="materia">
                                 @error('materia')
                                     <div class="alert alert-danger">{{ $message }}</div>
@@ -36,14 +27,14 @@
                             </div>
     
                             <div class="form-group">
-                                <label for="descripcion">Seccion:</label>
+                                <label for="descripcion" class="dark:text-white">Seccion:</label>
                                 <input type="text" class="form-control" id="seccion" name="seccion">
                                 @error('seccion')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <br>
-                            <button type="submit" class="btn btn-primary">Crear Clase</button>
+                            <button type="submit" class="btn btn-primary dark:text-white" class="">Crear Clase</button>
                             <br>
                         </form>
                     </div>
@@ -51,5 +42,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+</x-app-layout>

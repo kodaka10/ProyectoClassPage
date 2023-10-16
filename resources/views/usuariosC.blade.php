@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Datos Usuarios</title>
-</head>
-<body>
-    <!--<x-navbar/> -->
-    <x-navbar/>
-    <h4>Informacion usuario</h4>
-    <p>Nombre: {{$usuarios->name}}</p>
-    <p>Correo: {{$usuarios->email}}</p>
-</body>
-</html>
+<x-app-layout>
+
+<h4>Informacion usuario</h4>
+
+@foreach($usuarios->clases as $clase)
+<p>Nombre: {{$usuarios->name}}</p>
+<h2>Clases: {{$clase->titulo}}</h2>
+<h2>Clases: {{$clase->materia}}</h2>
+<h2>Clases: {{$clase->seccion}}</h2>
+<br>
+
+@endforeach
+
+</x-app-layout>

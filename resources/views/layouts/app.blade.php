@@ -11,16 +11,16 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
-
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!-- Styles -->
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <x-banner />
-
+        <x-navbar></x-navbar>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
         
             <!-- Page Heading -->
@@ -41,6 +41,15 @@
         @stack('modals')
 
         @livewireScripts
+        {{--         
+        <script>
+            document.addEventListener('livewire:initialized', () => {
+                @this.on('alert', (event) => {
+
+                });
+            });
+        </script> --}}
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
     </body>
 </html>
