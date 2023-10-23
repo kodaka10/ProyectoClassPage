@@ -1,3 +1,3 @@
 <x-app-layout>
-    <h3>hola</h3>
+    @livewire('clases-all')
 </x-app-layout>

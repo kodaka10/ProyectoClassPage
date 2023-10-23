@@ -33,6 +33,23 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="form-group">
+                                <label for="descripcion" class="dark:text-white">Color:</label>
+                                {{-- <input type="text" class="form-control" id="seccion" name="seccion"> --}}
+                                <select name="color" id="color">
+                                    <option value="red">Rojo</option>
+                                    <option value="blue">Azul</option>
+                                    <option value="gray">Gris</option>
+                                    <option value="green">Verde</option>
+                                    <option value="yellow">Naranja</option>
+                                    <option value="indigo">Azul Oscuro</option>
+                                    <option value="purple">Morado</option>
+                                    <option value="pink">Rosa</option>
+                                </select>
+                                @error('seccion')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                             <br>
                             <button type="submit" class="btn btn-primary dark:text-white" class="">Crear Clase</button>
                             <br>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SitioController;
 use App\Http\Controllers\ClaseController;
 use App\Livewire\ShowUsers;
+use App\Livewire\ClasesAll;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,7 +49,7 @@ Route::get('/mostrar-clases',[ClaseController::class,'mostrarClases'])->name('mo
 
 // Route::get('/consulta', ShowUsers::class)->name('consulta')->middleware('auth');
 
-Route::get('/vistaPrueba', [SitioController::class,'vistaDePrueba'])->name('vistaPrueba');
+// Route::get('/vistaPrueba', [SitioController::class,'vistaDePrueba'])->name('vistaPrueba');
 
 
 Route::middleware('auth')->group(function()
@@ -57,7 +58,7 @@ Route::middleware('auth')->group(function()
 }
 );
 
-
+Route::get('/vistaPrueba', ClasesAll::class)->name('vistaPrueba');
 
 Route::middleware([
     'auth:sanctum',

@@ -24,12 +24,15 @@ class ClaseController extends Controller
    {
     $request -> validate(['titulo' => 'required|max:30',
     'materia' => 'required|max:40',
-    'seccion' => 'required|max:10']);
-    
+    'seccion' => 'required|max:10',
+    'color' => 'required' 
+      ]);
+
     $clase = new Clase();
     $clase->titulo = $request->titulo;
     $clase->materia = $request->materia;
     $clase->seccion =  $request->seccion;
+    $clase->color = $request->color;
     // $clase->nombre = Auth::user()->name;
     // $clase->apellido = Auth::user()->lastname;
     $clase->user_id = Auth::user()->id;

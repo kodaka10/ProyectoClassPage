@@ -9,6 +9,14 @@ class Clase extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'titulo',
+        'materia',
+        'seccion',
+        'color',
+        'user_id',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
