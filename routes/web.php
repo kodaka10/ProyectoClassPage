@@ -44,7 +44,20 @@ Route::get('/mostrar-clases',[ClaseController::class,'mostrarClases'])->name('mo
 
 // Route::get('/consulta',[ShowUsers::class,'render'])->name('consulta');
 
-Route::get('/consulta', ShowUsers::class)->name('consulta');
+// Route::get('/consulta', ShowUsers::class)->name('consulta');
+
+// Route::get('/consulta', ShowUsers::class)->name('consulta')->middleware('auth');
+
+Route::get('/vistaPrueba', [SitioController::class,'vistaDePrueba'])->name('vistaPrueba');
+
+
+Route::middleware('auth')->group(function()
+{
+    Route::get('/consulta', ShowUsers::class)->name('consulta');
+}
+);
+
+
 
 Route::middleware([
     'auth:sanctum',

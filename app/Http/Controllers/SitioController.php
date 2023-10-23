@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 class SitioController extends Controller
 {
 
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->except('index','show');
+                                    // ->only('destroy');
+    // }
+
+
     public function loginForm()
     {
         return view('login');
@@ -115,6 +122,11 @@ class SitioController extends Controller
     {
         $usuarios->delete();
         return redirect()->route('home');
+    }
+
+    public function vistaDePrueba()
+    {
+        return view('vistaPrueba');
     }
 
 
