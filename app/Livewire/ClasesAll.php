@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class ClasesAll extends Component
 {
     public $buscar = '';
-    public $open = false;
+    public $open = false, $openJ = false;
 
     public $Titulo, $Materia, $Seccion, $Color;
+    public $IdClase;
 
     use WithPagination;
 
@@ -21,6 +22,11 @@ class ClasesAll extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
+    }
+
+    public function RandomNumber()
+    {
+        return mt_rand(10000, 99999);
     }
 
     protected $rules = [
@@ -36,6 +42,7 @@ class ClasesAll extends Component
             $query->where('name', 'like', '%' . $this->buscar . '%')
                 ->orWhere('lastname', 'like', '%' . $this->buscar . '%');
         })
+        ->orderBy('created_at', 'desc')
         ->paginate(10);
 
         return view('livewire.clases-all', compact('clases'));
@@ -57,6 +64,7 @@ class ClasesAll extends Component
             'materia' => $this->Materia,
             'seccion' => $this->Seccion,
             'color' => $this->Color,
+            'codigo' => $this->RandomNumber(),
             'user_id' => $user->id,
         ]);
 
@@ -64,6 +72,19 @@ class ClasesAll extends Component
 
         $this->dispatch('render');
         
+    }
+
+    public function JoinId($claseId)
+    {
+        $this->IdClase = $claseId;
+        
+        $this->openJ = true;
+    }
+
+    public function JoinClase()
+    {
+        $clase = Clase::find($this->IdClase);
+        $this->reset(['IdClase','openJ']);
     }
 
 }

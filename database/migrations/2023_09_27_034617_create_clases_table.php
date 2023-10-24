@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('materia');
             $table->string('seccion');
             $table->string('color');
+            $table->string('codigo');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

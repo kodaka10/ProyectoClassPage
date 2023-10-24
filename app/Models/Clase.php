@@ -14,6 +14,7 @@ class Clase extends Model
         'materia',
         'seccion',
         'color',
+        'codigo',
         'user_id',
     ];
 

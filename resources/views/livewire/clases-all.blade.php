@@ -21,7 +21,7 @@
                 <p class="text-gray-600 text-sm">Materia: {{$clase->materia}}</p>
                 <p class="text-gray-600 text-sm mb-2">Sección: {{$clase->seccion}}</p>
                 @if($clase->user->id !== Auth::user()->id)
-                <a href="#" class="bg-blue-500 hover-bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-block">Unirse</a>
+                <a class="cursor-pointer bg-blue-500 hover-bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-block" wire:click="JoinId({{$clase->id}})">Unirse</a>
                 @endif
             </div>
         @endforeach
@@ -104,6 +104,37 @@
         </x-slot>
 
     </x-dialog-modal>   
+
+    <x-dialog-modal wire:model="openJ">
+        
+        <x-slot name="title">
+            Unirse a la clase
+        </x-slot>
+
+        <x-slot name="content">
+            <div class="mb-4">
+                <x-label value="Ingrese el codigo de la clase: {{$IdClase}}"/>
+                <x-input type="text" class="w-full" wire:model="Join"/>
+                @error('Join')
+                    <span class="text-red-500">
+                        {{$message}}
+                    </span>
+                @enderror
+            </div>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button class="mr-4 " wire:click="JoinClase" wire:loanding.attr="disabled" wire:target="JoinClase" >
+                Unirse
+            </x-secondary-button>
+            
+            <x-danger-button wire:click="$set('openJ', false)">
+                Cancelar
+            </x-danger-button>
+
+        </x-slot>
+
+    </x-dialog-modal>  
 
 
 </div>

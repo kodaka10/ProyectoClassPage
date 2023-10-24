@@ -21,6 +21,7 @@ class ClaseFactory extends Factory
             'materia' =>$this->faker->word,
             'seccion' => $this->faker->word,
             'color' => $this->faker->randomElement(['red', 'blue', 'gray', 'green', 'yellow', 'indigo', 'purple', 'pink']),
+            'codigo' => $this->faker->randomNumber(5, true),
             'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
