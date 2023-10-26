@@ -37,9 +37,9 @@ Route::delete('/deleteUser/{usuarios}',[SitioController::class,'deleteUserSave']
 
 //-----------------Clases-----------------
 
-Route::get('/clases',[ClaseController::class,'vistaClases'])->name('clases');
+Route::get('/tareaTemporal',[ClaseController::class,'vistaTarea'])->name('tareaTemporal');
 Route::get('/crearClase',[ClaseController::class,'crearClaseForm'])->name('crearClase');
-Route::post('/crear-clase',[ClaseController::class,'crearClaseSave'])->name('crear-clase');
+// Route::post('/crear-clase',[ClaseController::class,'crearClaseSave'])->name('crear-clase');
 Route::get('/mostrar-clases',[ClaseController::class,'mostrarClases'])->name('mostrar-clases');
 
 
@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function()
 }
 );
 
-Route::get('/vistaPrueba', ClasesAll::class)->name('vistaPrueba');
+Route::get('/Clases', ClasesAll::class)->name('Clases');
 
 Route::middleware([
     'auth:sanctum',

@@ -9,17 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ClaseController extends Controller
 {
-   public function vistaClases()
+   public function vistaTarea()
    {
-        return view('clases');
+        return view('tareaTemporal');
    }
 
+   /*
    public function crearCLaseForm()
    
    {
      return view('crearClase');
    }
 
+   */
+
+   /*
    public function crearClaseSave(Request $request)
    {
     $request -> validate(['titulo' => 'required|max:30',
@@ -43,6 +47,7 @@ class ClaseController extends Controller
     
     return redirect()->route('home');
    }
+   */
 
    public function mostrarClases(Clase $clases)
    {

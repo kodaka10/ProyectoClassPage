@@ -8,32 +8,30 @@
             <x-button class="mt-4" wire:click="$set('open', true)">Crear Clase</x-button>
         </div>
         @if($clases->count())
-        @foreach($clases as $clase)
-        {{-- @if (!$this->userHasJoinedClass(Auth::user()->id, $clase->id)) --}}
-            <div class="bg-white shadow-md rounded-lg p-4 mt-4">
-                <div class="bg-{{$clase->color}}-500 w-full h-32 mb-4 rounded-lg"></div>
-                <div class="flex items-center mb-2">
-                    <img src="/Images/Perfil/Default.webp" alt="Imagen del Profesor" class="h-8 w-8 rounded-full">
-                    <div class="ml-2">
-                        <h2 class="text-xl font-semibold text-gray-800">{{$clase->titulo}}</h2>
-                        <p class="text-gray-600 text-sm">Profesor: {{$clase->user->name}} {{$clase->user->lastname}}</p>
+        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3"  style="grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));">
+            @foreach($clases as $clase)
+                <div class="bg-white shadow-md rounded-lg p-4 mt-4">
+                    <div class="bg-{{$clase->color}}-500 w-full h-32 mb-4 rounded-lg"></div>
+                    <div class="flex items-center mb-2">
+                        <img src="/Images/Perfil/Default.webp" alt="Imagen del Profesor" class="h-8 w-8 rounded-full">
+                        <div class="ml-2">
+                            <h2 class="text-xl font-semibold text-gray-800">{{$clase->titulo}}</h2>
+                            <p class="text-gray-600 text-sm">Profesor: {{$clase->user->name}} {{$clase->user->lastname}}</p>
+                        </div>
                     </div>
+                    <p class="text-gray-600 text-sm">Materia: {{$clase->materia}}</p>
+                    <p class="text-gray-600 text-sm mb-2">Sección: {{$clase->seccion}}</p>
+                    <a class="cursor-pointer bg-blue-500 hover-bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-block" wire:click="JoinId({{$clase->id}})">Unirse</a>
                 </div>
-                <p class="text-gray-600 text-sm">Materia: {{$clase->materia}}</p>
-                <p class="text-gray-600 text-sm mb-2">Sección: {{$clase->seccion}}</p>
-                @if($clase->user->id !== Auth::user()->id && !$this->userHasJoinedClass(Auth::user()->id, $clase->id))
-                <a class="cursor-pointer bg-blue-500 hover-bg-blue-600 text-white font-semibold py-2 px-4 rounded inline-block" wire:click="JoinId({{$clase->id}})">Unirse</a>
-                @endif
-            </div>
-            {{-- @endif --}}
-        @endforeach
+            @endforeach
+        </div>
         @if($clases->hasPages())
         <div class="px-6 py-3 ">
             {{$clases->links()}} 
          </div>
          @endif
         @else
-            <h3 class="mt-4">no se encontraron coincidencias</h3>
+            <h3 class="mt-4 dark:text-white ">no se encontraron coincidencias</h3>
         @endif
     </div>
 
@@ -137,6 +135,16 @@
         </x-slot>
 
     </x-dialog-modal>  
-
-
+    <br>
+    @push('js')
+        <script>
+            Livewire.on('alertaC', function() {
+                Swal.fire(
+                'Exito!',
+                'La clase se creo correctamente',
+                'success'
+                )
+            });
+        </script>
+    @endpush
 </div>
