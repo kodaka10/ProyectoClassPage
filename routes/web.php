@@ -5,16 +5,7 @@ use App\Http\Controllers\SitioController;
 use App\Http\Controllers\ClaseController;
 use App\Livewire\ShowUsers;
 use App\Livewire\ClasesAll;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,8 +13,6 @@ Route::get('/', function () {
 
 //-----------------Usuarios-----------------
 
-Route::get('/login',[SitioController::class, 'loginForm'])->name('login');
-Route::get('/register',[SitioController::class, 'registerForm'])->name('register');
 Route::get('/logout',[SitioController::class, 'logout'])->name('logout');
 
 Route::post('validar-usuario',[SitioController::class, 'login']);
@@ -51,12 +40,22 @@ Route::get('/mostrar-clases',[ClaseController::class,'mostrarClases'])->name('mo
 
 // Route::get('/vistaPrueba', [SitioController::class,'vistaDePrueba'])->name('vistaPrueba');
 
+Route::get('/misclases/clase-detail/{titulo}-{id}',[ClaseController::class,'showClaseDetail'])->name('clase-detail');
+Route::get('/misclases/all',[ClaseController::class,'mostrarMisClases'])->name('all');
 
 Route::middleware('auth')->group(function()
 {
     Route::get('/consulta', ShowUsers::class)->name('consulta');
 }
 );
+
+Route::middleware('guest')->group(function()
+{
+    Route::get('/login',[SitioController::class, 'loginForm'])->name('login');
+    Route::get('/register',[SitioController::class, 'registerForm'])->name('register');
+}
+);
+
 
 Route::get('/Clases', ClasesAll::class)->name('Clases');
 

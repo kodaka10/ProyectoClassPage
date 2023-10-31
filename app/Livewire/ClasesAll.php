@@ -7,13 +7,14 @@ use App\Models\UserInClase;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ClasesAll extends Component
 {
     public $buscar = '';
     public $open = false, $openJ = false;
 
-    public $Titulo, $Materia, $Seccion, $Color, $Join;
+    public $Titulo, $Materia, $Seccion, $Color="red", $Join;
     public $IdClase;
 
     use WithPagination;
@@ -115,7 +116,7 @@ class ClasesAll extends Component
         
         $user = Auth::user();
 
-        Clase::create([
+        $clase = Clase::create([
             'titulo' => $this->Titulo,
             'materia' => $this->Materia,
             'seccion' => $this->Seccion,
@@ -126,7 +127,10 @@ class ClasesAll extends Component
 
         $this->reset(['open','Titulo','Materia','Seccion','Color']);
         $this->dispatch('render');
-        $this->dispatch('alertaC');        
+        $this->dispatch('alertaC');    
+
+        $tituloSlug = str_replace(' ', '_', $clase->titulo);
+        return redirect('/misclases/clase-detail/' . $tituloSlug . '-' . $clase->id);
     }
 
     public function JoinId($claseId)

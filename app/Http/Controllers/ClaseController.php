@@ -6,9 +6,14 @@ use App\Models\Clase;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use App\Models\UserInClase;
+use Livewire\WithPagination;
 
 class ClaseController extends Controller
 {
+  use WithPagination;
+
    public function vistaTarea()
    {
         return view('tareaTemporal');
@@ -52,6 +57,29 @@ class ClaseController extends Controller
    public function mostrarClases(Clase $clases)
    {
       return view('mostrar-clases', compact('clases'));
+   }
+
+   public function showClaseDetail($titulo, $id)
+   {
+    $titulo = str_replace(' ', '_', $titulo);
+
+      $clase = Clase::find($id);
+      
+      if (!$clase) {
+          abort(404); 
+      }
+      return view('misclases.clase-detail', compact('clase', 'titulo'));
+   }
+
+   public function mostrarMisClases()
+   {
+      $userId = Auth::user()->id;
+      $clasesUnidas = UserInClase::where('user_id', $userId)->pluck('clase_id')->all();
+      $clasesCreadas = Clase::where('user_id', $userId)->pluck('id')->all();
+      $misClasesIds = array_merge($clasesUnidas, $clasesCreadas);
+      $misClases = Clase::whereIn('id', $misClasesIds)->paginate(9);
+
+      return view('misclases.all', compact('misClases'));
    }
 
 }
