@@ -61,10 +61,11 @@ class ClaseController extends Controller
 
    public function showClaseDetail($titulo, $id)
    {
+
     $titulo = str_replace(' ', '_', $titulo);
 
       $clase = Clase::find($id);
-      
+
       if (!$clase) {
           abort(404); 
       }
