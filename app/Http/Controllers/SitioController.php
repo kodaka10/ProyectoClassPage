@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\bienvenidoMail;
 
 class SitioController extends Controller
 {
@@ -41,6 +43,9 @@ class SitioController extends Controller
         $user->password = Hash::make($request->contraseña);
         $user->lastname = $request->apellido;
         $user->save();
+
+        Mail::to('hello@example.com')
+            ->send(new bienvenidoMail());
 
         //Auth::login($user);
         //$request->session()->regenerate();

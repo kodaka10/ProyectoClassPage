@@ -20,18 +20,26 @@ class ClaseAnuncio extends Component
     public $archivo;
     public $fecha_vencimiento;
 
-    public $clase;
+    public $clase; // instancia de la clase tomada de clase-detail
     public $usuario;
     public $anuncio;
+
+    // public $anuncioClase;
 
     #[On('render')]
 
 
     public function render()
     {
-        return view('livewire.clase-anuncio');
+        $usuario = Auth::user();
+    
+        $anunciosClase = Tareas::where('creador_anuncio', $usuario->id)
+                               ->where('id_fromClase', $this->clase->id)
+                               ->get();
+    
+        return view('livewire.clase-anuncio', compact('anunciosClase'));
     }
-
+    
     public function mount()
     {
         $this->formularioVisible  = false;
@@ -47,7 +55,7 @@ class ClaseAnuncio extends Component
         'informacion' => 'required|string',
         'tipo' => 'required|in:anuncio,tarea',
         'archivo' => 'nullable|file|mimes:pdf,doc,docx|max:4096', 
-        'fecha_vencimiento' => 'nullable|date',
+        'fecha_vencimiento' => 'nullable|date|required',
     ];
     public function mostrarFormulario()
     {
@@ -77,7 +85,7 @@ class ClaseAnuncio extends Component
             'titulo' => $this->titulo,
             'informacion' => $this->informacion,
             'tipo' => $this->tipo,
-            'archivo' => $archivoURL,
+            'archivo' => 'public/' . $archivoURL,
             'nombre_original' => $this->archivo->getClientOriginalName(),
             'fecha_publicacion' => $fechaPublicacion,
             'fecha_vencimiento' => $this->fecha_vencimiento,

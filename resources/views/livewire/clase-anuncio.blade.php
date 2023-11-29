@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="archivo" class="block text-sm font-medium text-gray-600">Archivo:</label>
+                    <label for="archivo" class="block text-sm font-medium text-gray-600">Archivo(opcional)</label>
                     <input wire:model="archivo" type="file" name="archivo" id="archivo" class="mt-1 p-2 border rounded-md w-full">
                     @error('archivo')
                         <span class="text-red-500">
@@ -71,7 +71,7 @@
                 <div class="mb-4">
                     <label for="fecha_vencimiento" class="block text-sm font-medium text-gray-600">Fecha de vencimiento:</label>
                     <input wire:model="fecha_vencimiento" type="date" name="fecha_vencimiento" id="fecha_vencimiento" class="mt-1 p-2 border rounded-md w-full"  min="{{ now()->format('Y-m-d') }}">
-                    @error('archivo')
+                    @error('fecha_vencimiento')
                         <span class="text-red-500">
                             {{$message}}
                         </span>
@@ -90,23 +90,27 @@
         </div>
     </div>
     @endif
-        
+    
     <div class="mt-4 mx-auto w-full md:w-3/4">
+    @if ($anunciosClase->count())
+        @foreach ($anunciosClase as $anuncio)
         <div class="bg-white shadow-md rounded-lg p-4 mt-4">
             <div class="flex items-center mb-2">
                 <div class="w-10 h-10 mr-2 text-center">
                     <i class="bi bi-book "></i>
                 </div>
                 <div>
-                    <h2 class="text-base font-semibold text-gray-800">juan perez rodrigez mendez - 17 nov</h2>
+                    <h2 class="text-base font-semibold text-gray-800">{{$anuncio->usuario->name}} - Fecha: {{\Carbon\Carbon::parse($anuncio->fecha_publicacion)->format('d-m-y') }}</h2>
                     <p class="text-gray-600 text-sm">
-                        <span class="font-bold">Ha publicado un anuncio: <a href="#" class="text-blue-500">Material de apoyo para el lenguaje C++</a></span>
+                        <span class="font-bold">Ha publicado un anuncio: <a href="{{ route('clase-detail-anuncio', ['id' => $anuncio->id, 'titulo' => str_replace(' ', '_', $anuncio->titulo)]) }}" class="text-blue-500">{{$anuncio->titulo}}</a></span>
                     </p>
                 </div>
-                </div>
             </div>
-        </div>
-            
+        </div>  
+        @endforeach
+    @else
+        <h3 class="px-6 py-3 dark:text-gray-400">Aun no hay publicaciones.</h3> 
+    @endif
     </div>
 
 

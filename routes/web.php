@@ -26,7 +26,6 @@ Route::delete('/deleteUser/{usuarios}',[SitioController::class,'deleteUserSave']
 
 //-----------------Clases-----------------
 
-Route::get('/tareaTemporal',[ClaseController::class,'vistaTarea'])->name('tareaTemporal');
 Route::get('/crearClase',[ClaseController::class,'crearClaseForm'])->name('crearClase');
 // Route::post('/crear-clase',[ClaseController::class,'crearClaseSave'])->name('crear-clase');
 Route::get('/mostrar-clases',[ClaseController::class,'mostrarClases'])->name('mostrar-clases');
@@ -42,6 +41,9 @@ Route::get('/mostrar-clases',[ClaseController::class,'mostrarClases'])->name('mo
 
 Route::get('/misclases/clase-detail/{titulo}-{id}',[ClaseController::class,'showClaseDetail'])->name('clase-detail');
 Route::get('/misclases/all',[ClaseController::class,'mostrarMisClases'])->name('all');
+Route::get('/misclases/clase-detail-anuncio/{titulo}-{id}',[ClaseController::class,'showClaseAnuncio'])->name('clase-detail-anuncio');
+Route::get('descargar-archivo/{archivo}', [ClaseController::class, 'download_file'])->name('descargar-archivo');
+
 
 Route::middleware('auth')->group(function()
 {

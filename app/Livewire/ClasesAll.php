@@ -65,7 +65,8 @@ class ClasesAll extends Component
     {
 
         //Busqueda para las clases las cual el usuario no se ha unido
-        $clases = Clase::whereNotIn('id', function ($query) {
+        $clases = Clase::with('user') //eager loading
+        ->whereNotIn('id', function ($query) {
             $query->select('clase_id')
                 ->from('usersclases')
                 ->where('user_id', auth()->user()->id);

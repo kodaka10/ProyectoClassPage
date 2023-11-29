@@ -4,20 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Clase;
 use App\Models\User;
+use App\Models\Tareas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use App\Models\UserInClase;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Storage;
 
 class ClaseController extends Controller
 {
   use WithPagination;
-
-   public function vistaTarea()
-   {
-        return view('tareaTemporal');
-   }
 
    /*
    public function crearCLaseForm()
@@ -72,6 +69,21 @@ class ClaseController extends Controller
       return view('misclases.clase-detail', compact('clase', 'titulo'));
    }
 
+
+   public function showClaseAnuncio($titulo, $id)
+   {
+
+    $titulo = str_replace(' ', '_', $titulo);
+
+      $anuncio = Tareas::find($id);
+
+      if (!$anuncio) {
+          abort(404); 
+      }
+      return view('misclases.clase-detail-anuncio', compact('anuncio', 'titulo'));
+   }
+
+
    public function mostrarMisClases()
    {
       $userId = Auth::user()->id;
@@ -81,6 +93,13 @@ class ClaseController extends Controller
       $misClases = Clase::whereIn('id', $misClasesIds)->paginate(9);
 
       return view('misclases.all', compact('misClases'));
+   }
+
+   public function download_file(Request $request, $tareaId)
+   {
+      $tarea = Tareas::find($tareaId);
+
+      return Storage::download($tarea->archivo);
    }
 
 }
