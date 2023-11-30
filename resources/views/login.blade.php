@@ -3,7 +3,9 @@
     <div class="container mx-auto mt-8">
         <div class="max-w-md mx-auto bg-white rounded-md p-8 shadow-md">
             <h2 class="text-2xl font-semibold mb-6">Iniciar Sesión</h2>
-
+            @error('validacion')
+            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+            @enderror
             <form action="/validar-usuario" method="POST">
                 @csrf
 
@@ -24,6 +26,11 @@
                 </div>
 
                 <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Entrar</button>
+
+                <div class="mt-4">
+                    <a href="{{ route('register') }}" class="text-sm text-gray-500 hover:underline">Aun no tienes cuenta? registrate</a>
+                </div>
+
             </form>
         </div>
     </div>

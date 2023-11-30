@@ -40,6 +40,11 @@
                 </div>
 
                 <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Registrar</button>
+
+                <div class="mt-4">
+                    <a href="{{ route('login') }}" class="text-sm text-gray-500 hover:underline">Ya tienes cuenta? inicia sesion</a>
+                </div>
+
             </form>
         </div>
     </div>

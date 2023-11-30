@@ -76,7 +76,7 @@ class SitioController extends Controller
         else
         {
             //validar o mostrar mensaje de errores
-            return redirect()->route('login')->withErrors(['error' => 'Correo o contraseña incorrectos.']);;
+            return redirect()->route('login')->withErrors(['validacion' => 'Correo o contraseña incorrectos.']);;
         }
 
     }

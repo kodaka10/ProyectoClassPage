@@ -54,7 +54,7 @@ class ClaseAnuncio extends Component
         'titulo' => 'required|max:50',
         'informacion' => 'required|string',
         'tipo' => 'required|in:anuncio,tarea',
-        'archivo' => 'nullable|file|mimes:pdf,doc,docx|max:4096', 
+        'archivo' => 'required|nullable|file|mimes:pdf,doc,docx|max:4096', 
         'fecha_vencimiento' => 'nullable|date|required',
     ];
     public function mostrarFormulario()
